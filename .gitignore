@@ -1,0 +1,32 @@
+# Compiled output
+dist/*
+
+# Local data and config
+src/data/config.json
+src/data/paths/*
+!src/data/paths/
+
+# Local assets
+src/assets/user/*
+!src/assets/user/
+
+todo.txt
+
+# NodeJS
+node_modules/
+yarn-error.log
+
+# VSCode
+**/.vscode/*
+!**/.vscode/tasks.json
+!**/.vscode/settings.template.json
+!**/.vscode/launch.template.json
+!**/.vscode/extensions.json
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+!**/.gitkeep

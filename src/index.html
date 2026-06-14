@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!-- Enter your website's title here. -->
+        <title>Your page title goes here.</title>
+        <!-- Enter your website's description here. -->
+        <meta name="description" content="Your description goes here.">
+        <!-- Enter your website's keywords here. -->
+        <meta name="keywords" content="Your keywords go here.">
+        <!-- Enter your preferred google site name in the name field and your canonical url in the url field. -->
+        <script type="application/ld+json">
+            {
+                "@context" : "https://schema.org",
+                "@type" : "WebSite",
+                "name" : "Your sidename goes here.",
+                "url" : "https://example.com/"
+            }
+        </script>
+        <!-- Enter your favicon's filepath here. -->
+        <link rel="icon" type="image/x-icon" href="assets/user/filename.fileextension">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="index.css"/>
+        <script type="module" src="main.js"></script>
+    </head>
+
+    <body>
+        <div id="map-root" class="no-select">
+            <div id="map-container" ondragstart="return false"></div>
+            <div id="tooltip-popup">
+                <div id="tooltip-border">
+                    <span id="tooltip-content" class="scrollable"></span>
+                </div>
+                <svg id="tooltip-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <polygon points="0,0 50,100 100,0" fill="black" stroke="black" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div id="loading-screen">
+                <svg id="loading-animation" version="1.1" id="L7" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+                    <metadata>
+                        SVG icon licensed under MIT.
+
+                        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+                        The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+                        THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                    </metadata>
+                    <path d="M31.6,3.5C5.9,13.6-6.6,42.7,3.5,68.4c10.1,25.7,39.2,38.3,64.9,28.1l-3.1-7.9c-21.3,8.4-45.4-2-53.8-23.3c-8.4-21.3,2-45.4,23.3-53.8L31.6,3.5z">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="2s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M42.3,39.6c5.7-4.3,13.9-3.1,18.1,2.7c4.3,5.7,3.1,13.9-2.7,18.1l4.1,5.5c8.8-6.5,10.6-19,4.1-27.7c-6.5-8.8-19-10.6-27.7-4.1L42.3,39.6z">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="-360 50 50" repeatCount="indefinite"/>
+                    </path>
+                    <path d="M82,35.7C74.1,18,53.4,10.1,35.7,18S10.1,46.6,18,64.3l7.6-3.4c-6-13.5,0-29.3,13.5-35.3s29.3,0,35.3,13.5L82,35.7z">
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="2s" from="0 50 50" to="360 50 50" repeatCount="indefinite"/>
+                    </path>
+                </svg>
+            </div>
+        </div>
+        <div id="map-nav">
+            <button type="button" id="navbar-activate" class="no-select"> 
+                <svg class="menu-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <line class="button-drawing" x1="20" y1="25" x2="80" y2="25" stroke-width="6" stroke-linecap="round"/>
+                    <line class="button-drawing" x1="20" y1="50" x2="80" y2="50" stroke-width="6" stroke-linecap="round"/>
+                    <line class="button-drawing" x1="20" y1="75" x2="80" y2="75" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <div id="logo" class="no-select">
+                <span id="logo-text"></span>
+                <img id="logo-img"/>
+            </div>
+        </div>
+        <button id="center-map-button" class="no-select"> Center Map </button>
+        <aside id="editmenu" style="display: none;">
+            <div id="editmenu-content">
+                <div id="edit-selection">
+                    <character-selector></character-selector>
+                    <button id="new-character-button" type="button">New Character</button>
+                </div>
+                <div class="character-display-controller-container"></div>
+                <div class="path-editor-collection-container"></div>
+            </div>
+            <div id="edit-bottom-button-row">
+                <button id="create-path-button" class="edit-bottom-row-button" type="button">Create Path</button>
+                <button id="edit-coord-button" class="edit-bottom-row-button" type="button">Print Coords</button>
+                <button id="edit-save-button" class="edit-bottom-row-button" type="button">Save</button>
+                <button id="edit-save-pretty-button" class="edit-bottom-row-button" type="button">Save Pretty</button>
+                <button class="edit-bottom-row-button edit-button" type="button">Edit</button>
+            </div>
+        </aside>
+        <aside id="sidemenu">
+            <div id="sidemenu-button-row">
+                <div id="spoiler-controls-container">
+                    <label id="spoiler-label">Spoiler Protection: </label>
+                    <input type="checkbox" id="spoiler-toggle" class="custom-checkbox rect cross">
+                </div>
+                <button type="button" id="navbar-deactivate">
+                    <svg class="menu-button-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <line class="button-drawing" x1="20" y1="25" x2="80" y2="25" stroke-width="6" stroke-linecap="round"/>
+                        <line class="button-drawing" x1="20" y1="50" x2="80" y2="50" stroke-width="6" stroke-linecap="round"/>
+                        <line class="button-drawing" x1="20" y1="75" x2="80" y2="75" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="sidemenu-content">
+                <div id="about" class="scrollable" style="display: none;">
+                    <h4 class="about-header">Spoilerwarning</h4>
+                    <span class="textblock">
+                        <p>
+                            Activating spoiler protection raises the maximum section and book numbers to 
+                            a random high value, preventing the display from revealing when characters leave the story. <br>
+                            <strong>Note:</strong> This does not affect the animation, which will still 
+                            end automatically at the path's original end.
+                        </p>
+                    </span>
+                    <h4 class="about-header">About</h4>
+                    <div id="credits-container">
+                        <span class="textblock"></span>
+                    </div>
+                    <div class="divider"></div>
+                    <p class="footnote">Created with <a href="https://github.com/Myrktil/paths-of-the-fallen" target="_blank">Paths of the Fallen</a>.</p>
+                </div>
+                <character-selector></character-selector>
+                <div class="character-display-controller-container scrollable"></div> 
+            </div>
+            <footer id="sidemenu-footer">
+                <button class="sidemenu-footer-button edit-button">Edit</button>
+                <button id="about-button" class="sidemenu-footer-button" type="button">About</button>
+            </footer>
+        </aside>
+    </body>
+</html>

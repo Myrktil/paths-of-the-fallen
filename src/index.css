@@ -1,0 +1,1220 @@
+/* ==========================================================================
+   Color scheme
+   ========================================================================== */
+
+:root {
+    /* Base */
+    --accent: #637594;
+    --accent-border: #4e5663;
+    --accent-hover: #828fa6;
+    --accent-font: rgb(244, 244, 244);
+
+    --surface: #7B7F8A;
+    --surface-border: #4d4f56;
+    --surface-hover: #a7acba;
+
+    --on-surface: #c7c7c7;
+    --on-surface-border: #656565;
+    --on-surface-hover: #d8d6d6;
+    --on-surface-font: rgba(0, 0, 0, 0.833);
+
+    --map-background: rgb(40, 40, 40);
+
+    /* Advanced */
+    --tooltip-background: var(--accent);
+    --tooltip-border: var(--accent-border);
+
+    --spoiler-controls-background: var(--on-surface);
+
+    --sidemenu-background: var(--surface);
+    --sidemenu-font: var(--on-surface-font);
+    --sidemenu-border: var(--surface-border);
+    --sidemenu-footer: var(--surface-border);
+
+    --about-background: var(--surface);
+    --about-font: var(--on-surface-font);
+
+    --display-controller-background: var(--on-surface);
+    --display-controller-font: var(--on-surface-font);
+    --display-controller-border: var(--on-surface-border);
+    --display-controller-input: var(--accent);
+    --display-controller-input-font: var(--accent-font);
+    
+    --custom-checkbox-background: var(--accent);
+    --custom-checkbox-border: var(--surface-border);
+    --custom-checkbox-hover: var(--accent-hover);
+    --custom-checkbox-checked: var(--accent-font);
+
+    --custom-checkbox-bright: rgb(255, 255, 255);
+    --custom-checkbox-bright-background: rgb(255, 255, 255);
+    --custom-checkbox-bright-border: var(--surface-border);
+    --custom-checkbox-bright-hover: rgb(216, 216, 216);
+    --custom-checkbox-bright-checked: var(--accent);
+
+    --custom-slider-background: var(--accent);
+    --custom-slider-knob: var(--accent);
+    --gearshift-slider-base-dot: var(--accent);
+
+    --character-search-background: rgb(255, 255, 255);
+    --character-search-font: rgb(0, 0, 0);
+    --character-search-autocomplete-background: var(--character-search-background);
+    --character-search-autocomplete-font: var(--character-search-font);
+    --character-search-autcomplete-item-selected: rgb(205, 205, 205);
+
+    --character-selector-submit-background: var(--character-search-background);
+    --character-selector-submit-hover: var(--character-search-autcomplete-item-selected);
+    --character-selector-submit-stroke: var(--character-search-font);
+
+    --editmenu-background: var(--surface);
+    --editmenu-border: var(--surface-border);
+
+    --path-editor-collection-background: var(--on-surface);
+    --path-editor-background: var(--surface);
+    --path-editor-selected: var(--surface-hover);
+    --path-editor-style-selector-background: var(--accent);
+    --path-editor-style-selector-font: var(--accent-font);
+    --path-editor-input-background: rgb(255, 255, 255);
+    --path-editor-input-font: rgb(0, 0, 0);
+
+    --dialog-background: var(--surface);
+    --dialog-text-background: var(--on-surface);
+    --dialog-text-font: var(--on-surface-font);
+    --dialog-text-input-font: rgb(0, 0, 0);
+    --dialog-text-input-background: rgb(255, 255, 255);
+
+    --button-background: var(--accent);
+    --button-border: var(--accent-border);
+    --button-hover: var(--accent-hover);
+
+    --logo-font: var(--on-surface-font);
+}
+
+/* ==========================================================================
+   Map Display
+   ========================================================================== */
+
+#map-root{
+    width: 100%;
+    height: 100%;
+    background-color: var(--map-background);
+    position: fixed;
+    overflow: hidden;
+}
+
+#map-container{
+    position: absolute;
+    transform-origin: 0 0;
+    cursor: grab;  
+    overflow: hidden;
+}
+
+#tooltip-popup{
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    width: 16em;
+    height: fit-content;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#tooltip-border {
+    height: fit-content;
+    background-color: var(--tooltip-background);
+    border: 2px solid var(--tooltip-border);
+    border-radius: 0.2em;
+    /* Set vertical padding here so scroll respects it. */
+    padding: 0.5em 0;
+    pointer-events: all;
+}
+
+#tooltip-content {
+    display: block;
+    height: fit-content;
+    max-height: 10em;
+    /* Set horizontal padding here so the scroll bar is spaced from the text. */
+    padding: 0 0.5em;
+    text-wrap: balance;
+    text-align: center;
+    overflow-y: scroll;
+    cursor: text;
+    white-space: pre-wrap; /* pre-line to combine whitespaces */
+    overflow-wrap: anywhere;
+    tab-size: 4;
+}
+
+#tooltip-arrow {
+    position: relative;
+    /* Fix small gap which sometimes appears between border and arrow. */
+    top: -1px;
+    height: 1em;
+    width: 1em;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Sidemenu
+   ========================================================================== */
+
+#sidemenu{
+    display: none; /* Overwritten by sidemenu-manager */
+    flex-flow: column;
+    height: 100%;
+    position: fixed;
+    background-color: var(--sidemenu-background);
+    color: var(--sidemenu-font);
+    border-right: 1px var(--sidemenu-border) solid;
+    width: 100%;
+}
+
+#sidemenu-button-row {
+    display: flex;
+    position: relative;
+    flex-flow: row;
+    width: 100%;
+    height: 2em;
+    margin: 1em 0 0 0;
+}
+
+#spoiler-controls-container {
+    display: flex;
+    position: relative;
+    flex-flow: row;
+    justify-content: left;
+    column-gap: 0.5em;
+    margin: 0 auto 0 1em;
+    padding: 0 0.6em 0 0.6em;
+    background-color: var(--spoiler-controls-background);
+    border-radius: 0.2em;
+}
+
+#spoiler-label {
+    display: flex;
+    align-items: center;
+}
+
+#navbar-deactivate{
+    position: relative;
+    margin: 0 1em 0 auto;
+    height: 100%;
+    width: 3.5em;
+}
+
+#sidemenu-content {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    overflow: hidden;
+    height: 100%;
+    translate: 0 1em; /* Tranlate down a bit so content overlaps footer and appears beneath the footer's rounded edges. */
+    row-gap: 1em;
+}
+
+#sidemenu .character-selector {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* START About section */
+
+#about {
+    display: flex;
+    flex-flow: column;
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    overflow: auto;
+    background-color: var(--about-background);
+    color: var(--about-font);
+    border-radius: 0.2em;
+}
+
+.about-header {
+    margin: 1em auto;
+}
+
+.textblock {
+    text-align: left;
+}
+
+#credits-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.credits-header {
+    margin: 0 auto 0.5em;
+}
+
+/* END About section */
+
+#sidemenu-footer {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--sidemenu-footer);
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    width: 100%;
+    padding: 1em 0 0.5em 0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.413);
+    margin-top: auto;
+    z-index: 2;
+}
+
+.sidemenu-footer-button {
+    margin: 0 auto;
+    min-width: 4.6em;
+    padding: 0 0.7em;
+    height: 2em;
+}
+
+/* ==========================================================================
+   Character display controller
+   ========================================================================== */
+
+.character-display-controller-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    row-gap: 0.5em;
+}
+
+.character-display-controller{
+    display: flex; 
+    flex-flow: row;
+    flex-wrap: wrap;
+    background-color: var(--display-controller-background);
+    color: var(--display-controller-font);
+    border: 1px var(--display-controller-border) solid;
+    border-radius: 0.3em;
+    width: 90%; 
+    box-sizing: border-box;
+    padding: 1em 1.5em;
+    row-gap: 0.5em;
+}
+
+.character-display-controller .character-name{
+    margin: 0 0 0 auto;
+}
+
+.character-display-controller .controls-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* START book selector */
+
+.character-display-controller .book-selector{
+	display: flex;
+	align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+	gap: 0.5em;
+	width: fit-content;
+}
+
+.character-display-controller .number-input{
+    text-align: center;
+    background-color: var(--display-controller-input);
+    color: var(--display-controller-input-font);
+    border: transparent;
+    border-radius: 0.3em;
+    width: 1.5em; 
+    padding: 0; /* Overwrite safari default padding */
+}
+
+.character-display-controller .book-label{
+    margin: auto 0;
+}
+
+/* END book selector */
+
+/* START sliders */
+
+.slider-container {
+    display: flex;
+    flex-flow: column;
+    row-gap: 0.4em;
+}
+
+.character-display-controller .slider-container {
+    width: 100%;
+}
+
+.slider-controls-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    column-gap: 0.5em;
+}
+
+.slider-controls-container .restriction-label{
+    margin: 0 auto;
+}
+
+.slider-controls-container .custom-slider {
+    width: 60%;
+    margin: auto 0 auto auto;
+    height: 5px;
+}
+
+.slider-controls-container .gearshift-element {
+    width: 60%;
+}
+
+/* END Sliders */
+
+.character-display-controller .remove-button{
+    display: inline-block;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   Custom sliders
+   ========================================================================== */
+
+.custom-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 99em;  
+    background: var(--custom-slider-background);
+    outline: none;
+}
+
+/* START Slider thumb */
+
+:root {
+    --slider-image: /* Loaded from config */;
+    --slider-fallback: var(--custom-slider-knob);
+}
+
+.custom-slider-thumb {
+    --thumb-size: 1.5em;
+}
+
+.custom-slider-thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none; /* Overrites default safari box shadow */
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border: 0;
+    background: var(--slider-image);
+    background-size: 100%;
+    cursor: pointer;
+}
+
+.custom-slider-thumb::-moz-range-thumb {
+    width: var(--thumb-size);
+    height: var(--thumb-size);
+    border: 0;
+    border-radius: 100em;
+    background: var(--slider-image);
+    background-size: 100%;
+    cursor: pointer;
+}
+
+/* END Slider thumb */
+
+/* START Gear Shift */
+
+.gearshift-element {
+    position: relative;
+    margin: auto 0 auto auto;
+    height: 5px;
+}
+
+.gearshift-slider {
+    position: absolute;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;  
+    background: transparent;
+    outline: none;
+    z-index: 1;
+    margin: 0; /* Overwrite base margin */
+    --webkit-thumb-offset: 0; /* Overwritten in js */
+    --track-width: 0; /* Overwritten in js */
+    --webkit-gradient-margin: 0; /* Overwritten in js */
+}
+
+.gearshift-slider::-moz-range-track {
+    background: var(--custom-slider-background);
+    width: var(--track-width);
+}
+
+.gearshift-slider::-webkit-slider-runnable-track {
+    background: linear-gradient(
+        to right,
+        transparent 0%, 
+        transparent var(--webkit-gradient-margin),
+        var(--custom-slider-background) var(--webkit-gradient-margin),
+        var(--custom-slider-background) calc(100% - var(--webkit-gradient-margin)),
+        transparent calc(100% - var(--webkit-gradient-margin)),
+        transparent 100%
+    ); /* Setting width does not work */
+    height: 5px; /* Webkit doesn't automatically set height to container height */
+}
+
+.gearshift-slider::-webkit-slider-thumb {
+    margin-top: var(--webkit-thumb-offset);
+}
+
+.gearshift-dot-container {
+    display: flex;
+    flex-flow: row;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 0;
+    margin: 0 auto;
+    row-gap: 1em;
+}
+
+.gearshift-dot {
+    position: relative;
+    margin: 0 auto;
+    height: 0.5em;
+    width: 0.5em;
+    border-radius: 100%;
+    background-color: var(--custom-slider-background);
+    top: 2.5px; /* Compensate for slider height */
+    transform: translate(0, -50%); /* Center dot vertically */
+    pointer-events: none;
+}
+
+/* END Gear Shift */
+
+/* ==========================================================================
+   Edit Menu
+   ========================================================================== */
+
+#editmenu{
+    display: flex;
+    flex-flow: column;
+    row-gap: 1em;;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    background-color: var(--editmenu-background);
+    border-left: 1px var(--editmenu-border) solid;
+    transition: 0.25s;
+    width: 100%;
+}
+
+#editmenu-content {
+    display: flex;
+    position: relative;
+    flex-flow: column;
+    overflow: hidden;
+    height: 100%;
+    min-height: 0;
+    row-gap: 1em;
+}
+
+#edit-selection{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1em 1em 0 1em;
+    row-gap: 0.5em;
+}
+
+#editmenu .character-selector {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#new-character-button{
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    margin: 0 auto;
+}
+
+#editmenu .character-display-controller-container {
+    overflow: visible;
+}
+
+#edit-bottom-button-row{
+    display: flex;
+    position: relative;
+    width: 100%;
+    margin: auto 0 1em 0;
+}
+
+.edit-bottom-row-button{
+    margin: 0 auto;
+    height: 2em;
+}
+
+/* ==========================================================================
+   Path editor collection
+   ========================================================================== */
+
+.path-editor-collection-container {
+    display: flex;
+    overflow: hidden;
+}
+
+.path-editor-collection{
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    margin: 0 auto;
+    width: 90%;
+    background-color: var(--path-editor-collection-background);
+    box-sizing: border-box;
+    border-radius: 0.2em;
+    overflow: hidden;
+}
+
+.auto-scroll-area {
+    position: absolute;
+    height: 2em;
+    width: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.auto-scroll-area.top {
+    top: 0;
+}
+
+.auto-scroll-area.bottom {
+    bottom: 0;
+}
+
+.path-editor-wrapper {
+    position:relative;
+    display: flex;
+    margin: 0.6em;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 100%;
+    row-gap: 0.5em;
+}
+
+.position-marker {
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 0;
+    border: 1px solid firebrick;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Path editor
+   ========================================================================== */
+
+.path-editor{
+    display: flex;
+    flex-flow: row;
+    position: relative;
+    width: fit-content;
+    height: 2.5em;
+    background-color: var(--path-editor-background);
+    border-radius: 0.25em;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0.1em 0.25em;
+    column-gap: 0.3em;
+    margin: 0 auto;
+}
+
+.path-editor.first{
+    margin-top: 0;
+}
+
+.path-editor.selected{
+    background-color: var(--path-editor-selected);
+}
+
+.path-editor .drag-button{
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.path-editor .color-input {
+    width: 1em;
+    height: 1em;
+    padding: 0;
+    border: 0;
+}
+
+.path-editor .style-selector{
+    width: fit-content;
+    height: 80%;
+    position: relative;
+    background-color: var(--path-editor-style-selector-background);
+    color: var(--path-editor-style-selector-font);
+    border: 0;
+    border-radius: 0.2em;
+}
+
+.path-editor .width-input {
+    height: 70%;
+    width: 2em;
+    border-radius: 0.1em;
+    border: 0;
+    background-color: var(--path-editor-input-background);
+    color: var(--path-editor-input-font);
+}
+
+.path-editor .book-input{
+    height: 70%;
+    width: 1.2em;
+    border-radius: 0.1em;
+    border: 0;
+    background-color: var(--path-editor-input-background);
+    color: var(--path-editor-input-font);
+}
+
+/* Safari only (number input is larget on safari) */
+_::-webkit-full-page-media, _:future,:root .path-editor .book-input {
+    height: 50%;
+}
+
+.path-editor .end-of-section-input {
+    height: 1em;
+    width: 1em;
+}
+
+.path-editor .tooltip-button{
+    height: 2em;
+}
+
+.path-editor .path-delete-button{
+    height: 2em;
+}
+
+.path-editor-input {
+    margin: auto 0.1em;
+}
+
+
+/* ==========================================================================
+   Character selector
+   ========================================================================== */
+
+.character-selector {
+    position: relative;
+    display: flex;
+    height: 2.2em;
+    width: 100%;
+}
+
+.character-selector-invalid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 3px solid firebrick;
+    border-radius: 0.7em;
+    z-index: 99;
+    pointer-events: none;
+}
+
+.character-selector .character-search {
+    height: inherit;
+    width: 85%;
+}
+
+.character-selector-submit {
+    display: inline-block;
+    width: 15%;
+    height: 100%;
+    margin: auto;
+    padding: 0;
+    border: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.7em;
+    border-bottom-right-radius: 0.7em;
+    background-color: var(--character-selector-submit-background);
+    z-index: 2;
+}
+
+.character-selector-submit:hover {
+    background-color: var(--character-selector-submit-hover);
+}
+
+.character-selector-submit-icon {
+    height: 100%;
+    width: 100%;
+    stroke: var(--character-selector-submit-stroke);
+}
+
+/* ==========================================================================
+   Character search
+   ========================================================================== */
+
+.character-search {
+    overflow: visible;
+    margin: auto;
+}
+
+.character-search-input {
+    position: relative;
+    height: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1em;
+    border: 0;
+    border-radius: 0;
+    border-bottom-left-radius: 0.7em;
+    border-top-left-radius: 0.7em;
+    z-index: 3;
+    color: var(--character-search-font);
+    background-color: var(--character-search-background);
+}
+
+.autocomplete-container{
+    position: absolute;
+    top: 1.6em;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    padding: 0.6em 0;
+    background-color: var(--character-search-autocomplete-background);
+    border: 0;
+    border-radius: 0 0 0.7em 0.7em;
+    z-index: 2;
+}
+
+.autocomplete-item{
+    display: flex;
+    background-color: var(--character-search-autocomplete-background);
+    color: var(--character-search-autocomplete-font);
+    align-items: center;
+    padding: 0 0.85em;
+    height: 2em;
+}
+
+.autocomplete-item.selected{
+    background-color: var(--character-search-autcomplete-item-selected);
+}
+
+/* ==========================================================================
+   Dialogs
+   ========================================================================== */
+
+.dialog:is([open]) {
+    display: flex;
+    flex-flow: column;
+    row-gap: 1em;
+    width: 30em;
+    background-color: var(--dialog-background);
+}
+
+.dialog-text {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.5em;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--dialog-text-background);
+    color: var(--dialog-text-font);
+}
+
+.dialog-text-input{
+    height: 15em;
+    width: 100%;
+    margin-bottom: 1em;
+    box-sizing: border-box;
+    color: var(--dialog-text-input-font);
+    background-color: var(--dialog-text-input-background);
+}
+
+.dialog-button-row {
+    display: flex;
+}
+
+.dialog-button-row-button {
+    margin: 0 auto;
+    min-width: 2em;
+}
+
+::backdrop {
+    background-color: gray;
+    opacity: 0.75;
+  }
+
+/* ==========================================================================
+   Custom checkbox
+   ========================================================================== */
+
+/* Base */
+
+.custom-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--custom-checkbox-background);
+    border: 2px var(--custom-checkbox-border) solid;
+    display: flex;
+}
+
+.custom-checkbox:hover {
+    background-color: var(--custom-checkbox-hover);
+}
+
+.custom-checkbox::before {
+    content: "";
+    margin: auto;
+    background-color: var(--custom-checkbox-checked);
+    transform: scale(0);
+}
+
+.custom-checkbox:checked::before {
+    transform: scale(1);
+}
+
+/* Bright */
+
+.custom-checkbox.bright {
+    background-color: var(--custom-checkbox-bright-background);
+    color: var(--custom-checkbox-bright);
+    border: 2px var(--custom-checkbox-bright-border) solid;
+}
+
+.custom-checkbox.bright:hover {
+    background-color: var(--custom-checkbox-bright-hover);
+}
+
+.custom-checkbox.bright::before {
+    background-color: var(--custom-checkbox-bright-checked);
+}
+
+/* Rect - Make the checkbox rectangular. */
+
+.custom-checkbox.rect {
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    margin: auto 0;
+    border-radius: 0.15em;
+}
+
+.custom-checkbox.rect::before {
+    width: 50%;
+    height: 50%; 
+    border-radius: 15%;
+}
+
+/* Round - Make the checkbox round. */
+
+.custom-checkbox.round {
+    margin: auto 0;
+    width: 1em;
+    height: 1em;
+    border-radius: 100em;
+}
+
+.custom-checkbox.round::before {
+    width: 40%;
+    height: 40%;
+    border-radius: 100em;
+}
+
+/* Cross - Use a cross to mark checked status. */
+
+.custom-checkbox.cross::before {
+    /* Using a mask allows setting the strokes' stroke attribute to a variable value. */
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--custom-checkbox-checked);
+
+    mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><line x1='20' y1='20' x2='80' y2='80' stroke='black' stroke-width='13'/><line x1='80' y1='20' x2='20' y2='80' stroke='black' stroke-width='13'/></svg>");
+    mask-repeat: no-repeat;
+    mask-position: 0;
+    mask-size: contain;
+
+    -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><line x1='20' y1='20' x2='80' y2='80' stroke='black' stroke-width='13'/><line x1='80' y1='20' x2='20' y2='80' stroke='black' stroke-width='13'/></svg>");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position-x: 0;
+    -webkit-mask-position-y: 0;
+    -webkit-mask-size: contain;
+}
+
+/* ==========================================================================
+   Miscellaneous
+   ========================================================================== */
+#map-nav {
+    position: absolute;
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    height: 6em;
+    padding: 1em;
+    pointer-events: none;
+}
+
+#logo {
+    position: relative;
+    display: flex;
+    height: 100%;
+    margin: 0 0 auto auto;
+    column-gap: 1em;
+}
+
+#logo-img {
+    height: 70%;
+    margin: auto 0;
+}
+
+#logo-text{
+    /* Hide text on mobile since it's to large */
+    display: none; 
+    margin: auto;
+    font-size: 1.5em;
+    color: var(--logo-font);
+}
+
+#navbar-activate{
+    position: relative;
+    margin: auto auto auto 0;
+    height: 2em;
+    width: 4em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.413);
+    pointer-events: all;
+}
+
+#center-map-button{
+    position: fixed;
+    width: 7em;
+    height: 2em;
+    right: 1em;
+    bottom: 1em;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.413);
+}
+
+.flex-break{
+    flex-basis: 100%;
+    height: 0;
+}
+
+.search-icon {
+    width: 100%;
+    height: 100%;;
+}
+
+.menu-button-icon {
+    height: 100%;
+    width: 100%;
+}
+
+.divider {
+    margin: 0 auto;
+    width: 90%;
+    height: 0px;
+    border: 1px solid currentColor;
+}
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+#loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background-color: var(--map-background);
+}
+
+#loading-animation {
+    position: absolute;
+    width: 4em;
+    height: 4em;
+    top: 50%;
+    left: 50%;
+    padding: 3px; /* don't cut off svg at the border */
+    transform: translate(-50%, -50%);
+}
+
+#loading-animation path {
+    fill: black;
+}
+
+/* Replace base webkit slider */
+.scrollable::-webkit-scrollbar {
+    width: 0.3em;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    background: rgb(151, 151, 151);
+    border-radius: 999px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    background: rgb(92, 92, 92);
+    border-radius: 999px;
+}
+
+.footnote {
+    margin: 1.55em 0;
+    font-size: 0.6em;
+}
+
+/* ==========================================================================
+   Global
+   ========================================================================== */
+
+@font-face {
+    font-family: custom;
+    src: url(assets/system/font.ttf);
+}
+
+body {
+    color: var(--on-surface-font);
+    font-size: 4.8vw;
+    font-family: custom, Arial, sans-serif;
+    margin: 0;
+    touch-action: none;
+    background-color: var(--map-background);
+}
+
+input, a, select, textarea {
+    font-family: inherit;
+    color: inherit;
+    font-size: inherit;
+}
+
+/* Disable ios reload by scrolling page down. */
+html, body {
+  overscroll-behavior: none;
+}
+
+input {
+    outline: none;
+}
+
+button {
+    font-family: inherit;
+    color: var(--accent-font);
+    font-size: inherit;
+    background-color: var(--button-background);
+    border: 2px var(--button-border) solid;
+    border-radius: 0.5em;
+}
+
+button:hover {
+    background-color: var(--button-hover);
+}
+
+.button-drawing {
+    stroke: var(--accent-font);
+}
+
+select {
+    color: var(--on-surface-font);
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+/* Mobile */
+/* Base style  */
+
+/* Larger mobile */
+@media (min-width: 480px) {
+    #sidemenu {
+        width: 20em;
+        box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.336);
+    }
+
+    #editmenu {
+        width: 100%;
+        box-shadow: -10px 0px 10px rgba(0, 0, 0, 0.336);
+    }
+
+    #editmenu .character-selector {
+        width: 60%;
+    }
+
+    #new-character-button {
+        height: 100%;
+    }
+
+    #center-map-button {
+        width: 10em;
+        height: 3em;
+    }
+
+    #logo-text {
+        display: block;
+    }
+
+    body {
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    #sidemenu {
+        width: 20em;
+        box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    #editmenu {
+        width: 32em;
+        box-shadow: -10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    body {
+        font-size: 1.15rem;
+    }
+}
+
+/* Laptop */
+@media (min-width: 1024px) {
+    #sidemenu {
+        width: 24em;
+        box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    #editmenu {
+        width: 30em;
+        box-shadow: -10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    body {
+        font-size: 1.1rem;
+    }
+}
+
+/* Dektop */
+@media (min-width: 1280px) {
+    #sidemenu {
+        width: 24em;
+        box-shadow: 10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    #editmenu {
+        width: 35em;
+        box-shadow: -10px 0px 30px rgba(0, 0, 0, 0.336);
+    }
+
+    body {
+        font-size: 1.34rem;
+    }
+}

@@ -1,0 +1,1 @@
+<p>Change this text by editing the credits.txt file in the data/ folder.</p>
