@@ -9,7 +9,8 @@ const { argv } = require('node:process');
 // --sourcemap: Activate sourcemap when building.
 // --local-files: Copy local assets and paths into dist when building.
 // --banners: Don't overwrite banner and footer.
-const supportedOptions = ["reset-config", "clean", "sourcemap", "local-files", "banners"];
+// --user-files: Copy user related files such as the LICENSE and README into the dist folder.
+const supportedOptions = ["reset-config", "clean", "sourcemap", "local-files", "banners", "user-files"];
 const options = {};
 readArgs();
 
@@ -66,6 +67,17 @@ async function buildAll() {
         const distDataDirPath = path.join(dist, "data");
         await fs.mkdir(distDataDirPath, { recursive: true });
 
+        const userFiles = options["user-files"] === "true" ?? false;
+        if (userFiles) {
+            const srcReadmePath = path.join(root, "README.md");
+            const destReadmePath = path.join(dist, "README.md");
+            await fs.copyFile(srcReadmePath, destReadmePath);
+
+            const srcLicensePath = path.join(root, "LICENSE");
+            const destLicensePath = path.join(dist, "LICENSE");
+            await fs.copyFile(srcLicensePath, destLicensePath);
+        }
+
         // Copy config.
         const resetConfig = options["reset-config"] === "true" ?? false;
         if (resetConfig) {    
@@ -106,10 +118,6 @@ async function buildAll() {
         const srcCreditsPath = path.join(src, "data/credits.txt");
         const destCreditsPath = path.join(dist, "data/credits.txt");
         await fs.copyFile(srcCreditsPath, destCreditsPath);
-
-        const srcLicensePath = path.join(root, "LICENSE");
-        const destLicensePath = path.join(dist, "LICENSE");
-        await fs.copyFile(srcLicensePath, destLicensePath);
     } 
     catch (error) {
         console.error("Build failed!", error);

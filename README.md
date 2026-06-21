@@ -158,7 +158,7 @@ Mind the disclaimer at the top of this README.
 If you end up using this website and have any ideas for new features, would like to see or improvements for existing features or discovered a bug, you can open a new issue in this repository and I will see what I can do to help you.  
 
 ## How to build
-Clone the repository and install node.js and the required dependencies by running `npm install` in the directory.  
+Clone [the repository](https://github.com/Myrktil/paths-of-the-fallen) and install node.js and the required dependencies by running `npm install` in the directory.  
 To build the project run `npm run build` in the command line.
 The other build commands are:
 
