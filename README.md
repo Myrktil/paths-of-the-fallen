@@ -31,6 +31,7 @@ You can configure the website by editing the config.json file in the data/ folde
 | LOD_MODE | LOD-Mode allows displaying a less detailed map when the scale is small to save resources. Use when experiencing lag while dragging and zooming the map (test weaker devices such as phones and Chrome). Use as few additional images as possible as this increases initial site load time and data usage for each additional image. Using too many images might even decrease performance. Set to "none" to disable LOD, "mobile" to activate it only on phones, "portable" to activate it on phones and tablets or "all" to activate LOD on all devices. | "none" <br> "mobile" <br> "portable" <br >"all" |
 | MAP_IMAGE_LOD | The steps to be used for LOD. Entries must be ordered descending by scale. The image specified in "FILE" will be used when the current map scale gets smaller than the number in "SCALE". | \{ <br> &nbsp;&nbsp;&nbsp;&nbsp; "SCALE": \<any number> <br> &nbsp;&nbsp;&nbsp;&nbsp; "FILE": "\<FILENAME>.\<FILEXTENSION>" <br> } |
 | SUB_MAPS | A list of images specified by the "FILE" attribute that will be rendered on top of the background map. The images's center will be positioned at (X,Y), where "X" and "Y" are coordinates within the background map's pixel grid. You can use the "Print Coords" button in the edit menu to get the coordinates of a specific point on your background map. "WIDTH" and "HEIGHT" set the maximum size of the image in pixels relative to the background map (the image's aspect ratio will be kept). | \{ <br> &nbsp;&nbsp;&nbsp;&nbsp; "X": \<any number> <br> &nbsp;&nbsp;&nbsp;&nbsp; "Y": \<any number> <br> &nbsp;&nbsp;&nbsp;&nbsp; "WIDTH": \<any number> <br> &nbsp;&nbsp;&nbsp;&nbsp; "HEIGHT": \<any number> <br> &nbsp;&nbsp;&nbsp;&nbsp; "FILE": "\<FILENAME>.\<FILEXTENSION>" <br> } |
+| DISABLED_SHORTCUTS | A list of shortcuts that should be disabled. Refer to the "Shortcuts" section for the shortcut codes. | ["shortcut_code"]
 
 **All images linked in config.json must be provided in the assets/user/ folder.**
 
@@ -85,7 +86,8 @@ You can configure the website by editing the config.json file in the data/ folde
       "HEIGHT": 10,
       "FILE": "SubMapImage2.png"
     }
-  ]
+  ],
+  "DISABLED_SHORTCUTS": ["toggle_editmenu", "toggle_sidemenu"]
 }
 ```
 
@@ -144,6 +146,12 @@ After dragging it may look like the strokes of two paths aren't connected cleanl
 ### Adding characters to the website
 
 Once you have a json file containing path data, put it in the data/paths/ folder. Then head over to the config.json and put your filename and desired character name into the CHARACTER_LIST. Refer to the config section's example for help with the syntax.
+
+## Shortcuts
+| Shortcut | Code | Function |
+| --- | --- | --- |
+| CRTL+SHIFT+S | toggle_sidemenu | Toggles the side menu. |
+| CRTL+SHIFT+E | toggle_editmenu | Toggles the edit menu. Works even when edit menu button is disabled. |
 
 ## Suggesting improvements
 Mind the disclaimer at the top of this README.

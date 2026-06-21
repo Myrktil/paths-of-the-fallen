@@ -18,6 +18,7 @@ import CharacterSearch from "./elements/character-search-element";
 import PathEditor from "./elements/path-editor-element";
 import Gearshift from "./elements/gearshift-element";
 import Character from "./models/character";
+import { enableShortcut, Shortcut } from "./controllers/shortcut-manager";
 
 if (document.readyState == "loading") {
     document.addEventListener("DOMContentLoaded", () => main());
@@ -58,6 +59,12 @@ async function main() {
     initTooltipDisplayer();
     initInputDialog();
     initOptionsDialog();
+
+    for (const shortcut of Object.values(Shortcut)) {
+        if (!CONFIG.DISABLED_SHORTCUTS.includes(shortcut)) {
+            enableShortcut(shortcut as Shortcut);
+        }
+    }
 }
 
 // Apply config settings to parts which don't fit into any other module.

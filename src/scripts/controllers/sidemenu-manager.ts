@@ -64,7 +64,7 @@ async function displayCharacter(name: string) {
     }
 }
 
-function toggleSidemenu() {
+export function toggleSidemenu() {
     // Initially displayed.
     if (sidemenu.style.display != "none") {
         sidemenu.style.transform = `translate(${-sidemenu.clientWidth}px)`;

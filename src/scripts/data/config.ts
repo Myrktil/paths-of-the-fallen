@@ -13,6 +13,7 @@ export interface Config {
     readonly ANIMATION_SPEED: number;
     readonly CHARACTER_LIST: ReadonlyArray<CharacterListEntry>;
     readonly SUB_MAPS: ReadonlyArray<SubMapEntry>;
+    readonly DISABLED_SHORTCUTS: ReadonlyArray<string>;
 };
 
 export interface MapImageLODEntry { 

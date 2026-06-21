@@ -57,7 +57,7 @@ export function initEditmenu() {
     editmenu.style.display = "none";
 }
 
-function toggleEditmenu() {
+export function toggleEditmenu() {
     if (!(editmenu.style.display == "none")) {
         editmenu.style.transform = `translate(${editmenu.clientWidth}px)`;
         setTimeout(function() {

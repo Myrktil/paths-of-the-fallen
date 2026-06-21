@@ -28,4 +28,6 @@ const CONFIG: Config = {
     MAP_IMAGE_LOD: [],
 
     SUB_MAPS: [],
+
+    DISABLED_SHORTCUTS: [],
 } as const;
