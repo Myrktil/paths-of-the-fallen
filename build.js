@@ -10,7 +10,15 @@ const { argv } = require('node:process');
 // --local-files: Copy local assets and paths into dist when building.
 // --banners: Don't overwrite banner and footer.
 // --user-files: Copy user related files such as the LICENSE and README into the dist folder.
-const supportedOptions = ["reset-config", "clean", "sourcemap", "local-files", "banners", "user-files"];
+// --rename: Create a zip from the directory.
+const supportedOptions = [
+    "reset-config", 
+    "clean", "sourcemap", 
+    "local-files", 
+    "banners", 
+    "user-files",
+    "rename"
+];
 const options = {};
 readArgs();
 
@@ -118,6 +126,21 @@ async function buildAll() {
         const srcCreditsPath = path.join(src, "data/credits.txt");
         const destCreditsPath = path.join(dist, "data/credits.txt");
         await fs.copyFile(srcCreditsPath, destCreditsPath);
+
+        // Rename dist folder.
+        const newName = options["rename"];
+        if (newName) {
+            const distDirPath = path.join(root, "dist");
+            if (!(await fileExists(distDirPath))) {
+                throw Error("Failed to rename. Dist directory could not be found.");
+            }
+
+            const renamedDirPath = path.join(root, newName);
+            if (fileExists(renamedDirPath)) {
+                await fs.rm(renamedDirPath, { recursive: true, force: true });
+            }
+            await fs.rename(distDirPath, renamedDirPath);
+        }
     } 
     catch (error) {
         console.error("Build failed!", error);

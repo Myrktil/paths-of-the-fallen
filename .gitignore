@@ -1,5 +1,7 @@
 # Compiled output
 dist/*
+PathsOfTheFallen/*
+*.zip
 
 # Local data and config
 src/data/config.json

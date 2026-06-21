@@ -7,6 +7,6 @@
     "build": "node build.js --sourcemap --local-files --banners",
     "build-clean": "node build.js --clean --sourcemap --local-files --banners",
     "build-rc": "node build.js --sourcemap --local-files --banners --reset-config",
-    "publish": "node build.js --clean --reset-config --user-files"
+    "publish": "node build.js --clean --reset-config --user-files --rename=PathsOfTheFallen"
   }
 }
